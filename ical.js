@@ -685,6 +685,7 @@ module.exports = {
     CREATED: dateParameter('created'),
     'LAST-MODIFIED': dateParameter('lastmodified'),
     'RECURRENCE-ID': recurrenceParameter('recurrenceid'),
+    'RELATED-TO': storeParameter('relatedto'),
     RRULE(value, parameters, curr, stack, line) {
       curr.rrule = line;
       return curr;

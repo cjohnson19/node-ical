@@ -1196,6 +1196,34 @@ vows
           }
         }
       }
+    },
+    'with test24.ics (testing related to)': {
+      topic() {
+        return ical.parseFile('./test/test24.ics');
+      },
+      'first event': {
+        topic(events) {
+          return _.select(_.values(events), x => {
+            return x.uid === '000021a';
+          })[0];
+        },
+        'starts 14 Jul 2022 @ 12:00:00 (UTC)'(topic) {
+          assert.equal(topic.start.toISOString(), '2022-07-14T12:00:00.000Z');
+        }
+      },
+      'second event': {
+        topic(events) {
+          return _.select(_.values(events), x => {
+            return x.uid === '000021b';
+          })[0];
+        },
+        'starts 14 Jul 2022 @ 13:00:00 (UTC)'(topic) {
+          assert.equal(topic.start.toISOString(), '2022-07-21T13:00:00.000Z');
+        },
+        'is related to parent'(topic) {
+          assert.equal(topic.relatedto, '000021a');
+        }
+      }
     }
   })
   .export(module);
